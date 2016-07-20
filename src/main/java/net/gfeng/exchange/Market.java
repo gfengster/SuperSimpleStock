@@ -8,6 +8,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This is the main class for the stock market. It performs add/remove stock from
+ * the market, sell/buy quantity of shares at trade price.
+ * It also output a stock status based on the given formulas.
+ * 
+ * Some kinds of notification functions could be in place here. 
+ */
+
 public class Market implements Exchange, StockChangeListener {
 	
 	private final Map<String, Stock> mStocks;
@@ -16,15 +24,17 @@ public class Market implements Exchange, StockChangeListener {
 		mStocks = Collections.synchronizedMap(new HashMap<String, Stock>());
 	}
 	
+	@Override
 	public void addStock(Stock stock) {
 		mStocks.put(stock.getSymbol(), stock);
 	}
 
+	@Override
 	public void removeStock(String stockSymbol) {
 		mStocks.remove(stockSymbol);
-		
 	}
-
+	
+	@Override
 	public void exchange(String stockSymbol, Trade trade) {
 		final Stock stock = mStocks.get(stockSymbol);
 		if (stock != null) {
@@ -33,6 +43,7 @@ public class Market implements Exchange, StockChangeListener {
 			throw new RuntimeException(stockSymbol + " is not a valid stock");
 	}
 	
+	@Override
 	public void exchange(String stockSymbol, String tradetype, long quantity, double price, long timeStamp) {
 		final Stock stock = mStocks.get(stockSymbol);
 		if (stock == null) {

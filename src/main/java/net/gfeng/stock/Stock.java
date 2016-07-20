@@ -5,6 +5,11 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import net.gfeng.type.StockType;
+
+
+/**
+ * Holding a stock information and trades records.
+ */
 public class Stock implements TradeListener {
 		
 	private final String mSymbol;
@@ -105,6 +110,7 @@ public class Stock implements TradeListener {
 		return gm;
 	}
 	
+	@Override
 	public void add(Trade trade) {
 		if (trade.getQuantity() == 0)
 			throw new RuntimeException("The trade quantity is 0 on stock " + mSymbol);

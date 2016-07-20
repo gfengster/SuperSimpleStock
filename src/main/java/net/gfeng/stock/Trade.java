@@ -2,6 +2,9 @@ package net.gfeng.stock;
 
 import net.gfeng.type.TradeType;
 
+/**
+ * Represent a trade record without stock. So its instance must be inside a stock.
+ */
 public class Trade {
 	
 	private final TradeType mType;
